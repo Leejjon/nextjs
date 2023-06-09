@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 
 const QueueEntriesList = function() {
     const [openEntries, setOpenEntries] = useState<Array<string>>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -9,7 +10,9 @@ const QueueEntriesList = function() {
                 response.json().then(entriesFromServer => {
                     if (entriesFromServer) {
                         const {entries} = entriesFromServer;
-                        setOpenEntries(entries);
+
+                        setOpenEntries(entries.sort());
+                        setLoading(false);
                     }
                 })
             });
@@ -29,7 +32,13 @@ const QueueEntriesList = function() {
         setOpenEntries(newList);
     }
 
-    if (openEntries.length > 0) {
+    if (loading) {
+        return (
+            <div>
+                <p>Loading.</p>
+            </div>
+        );
+    } else {
         return (
             <div>
                 <p>Hello Cashier, you have {openEntries.length} open orders</p>
@@ -40,12 +49,6 @@ const QueueEntriesList = function() {
                 </ul>
             </div>
         );
-    } else {
-        return (
-            <div>
-                <p>Hello Cashier, you have {openEntries.length} open orders, you can relax!</p>
-            </div>
-        )
     }
 }
 export default QueueEntriesList;

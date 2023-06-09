@@ -11,5 +11,8 @@ export default async function handler(req: NextApiRequest,
         const {count} = rows[0];
         returnValue = count;
     }
+
+    // const {}
+
     res.status(200).json({count: returnValue});
 }
