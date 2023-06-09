@@ -8,7 +8,6 @@ export default async function handler(req: NextApiRequest,
                              RETURNING entryId;`;
     const row = rows[0];
     const {entryid} = row;
-    res.setHeader("Content-Type", "text/plain");
-    res.statusCode = 200;
-    res.send(entryid);
+
+    res.status(200).json({entryid: entryid});
 }

@@ -1,5 +1,5 @@
 import styles from './page.module.css';
-import CountDisplayer from '../CountDisplayer'
+import CountDisplayer from './components/CountDisplayer'
 
 export default async function Home() {
   return (
