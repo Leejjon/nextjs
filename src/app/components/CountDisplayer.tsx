@@ -44,7 +44,7 @@ const CountDisplayer = () => {
             return (
                 <div>
                     Thanks for ordering, your number is {result.entryid}.
-                    {count ? ` There are ${count} people in front of you in the queue` : "Loading..."}
+                    {count ? ` There are ${count} people in front of you in the queue` : " Loading..."}
                 </div>
             );
         }
