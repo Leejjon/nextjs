@@ -12,7 +12,11 @@ export default async function handler(req: NextApiRequest,
         returnValue = count;
     }
 
-    // const {}
-
-    res.status(200).json({count: returnValue});
+    let isReady = false;
+    const result = await sql`SELECT ready from queueEntries WHERE entryId = ${entryId as string};`;
+    if (result.rows) {
+        const {ready} = result.rows[0];
+        isReady = ready;
+    }
+    res.status(200).json({count: returnValue, ready: isReady});
 }
